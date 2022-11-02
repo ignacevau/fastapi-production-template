@@ -1,0 +1,10 @@
+version: "3"
+
+services:
+  web:
+    build:
+      dockerfile: "docker/Dockerfile"
+      context: "."
+      target: "production"
+    ports:
+      - "8000:8000"

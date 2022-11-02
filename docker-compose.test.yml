@@ -1,0 +1,8 @@
+version: "3"
+
+services:
+  lint:
+    build:
+      dockerfile: "docker/Dockerfile"
+      context: "."
+      target: "lint"

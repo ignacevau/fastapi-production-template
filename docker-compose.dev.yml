@@ -1,0 +1,57 @@
+version: "3"
+
+services:
+  db:
+    container_name: postgres
+    image: postgres:13
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: test_db
+      PG_DATA: /var/lib/postgresql/data
+
+      # this ENV variable is only required for the healthcheck section
+      # if you don't specify it, the check command will fail stating the root user doesn't exist in posgres
+      PGUSER: "postgres" 
+    healthcheck:
+      # this command checks if the database is ready, right on the source db server
+      test: [ "CMD-SHELL", "pg_isready" ]
+      interval: 5s
+      timeout: 5s
+      retries: 5
+
+  web:
+    container_name: fastapi
+    build:
+      dockerfile: "docker/Dockerfile"
+      context: "."
+      target: "development"
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      db:
+        condition: service_healthy
+
+  pgadmin:
+    container_name: pgadmin
+    image: dpage/pgadmin4
+    environment:
+      - PGADMIN_DEFAULT_EMAIL=admin@syntaxon.com
+      - PGADMIN_DEFAULT_PASSWORD=syntaxon
+    ports:
+      - "5050:80"
+    volumes:
+      - pgadmin-data:/var/lib/pgadmin
+    depends_on:
+      db: 
+        condition: service_healthy
+
+volumes:
+  pgadmin-data:
+  postgres-data:
