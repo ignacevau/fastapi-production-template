@@ -1,10 +1,11 @@
-import os
+from pydantic import AnyUrl, BaseSettings, PostgresDsn
 
-from dotenv import load_dotenv
+class AppSettings(BaseSettings):
+    class Config:
+        env_file = ".env"
+        env_file_encoding = "utf-8"
 
-BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-load_dotenv(os.path.join(BASE_DIR, ".env"))
+    DATABASE_URL: PostgresDsn
+    ALLOWED_CORS_ORIGINS: set[AnyUrl]
 
-
-class Config:
-    DB_CONFIG = os.getenv("DATABASE_URL")
+settings = AppSettings()

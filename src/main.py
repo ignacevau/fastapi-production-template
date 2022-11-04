@@ -1,26 +1,23 @@
 from fastapi import FastAPI
 
 from src.database import db
+from src.views import api
 
 
 def init_app():
     db.init()
 
-    app = FastAPI(
-        title="Users App",
-        description="Handling Our User",
-        version="1",
-    )
+    APP_CONFIG = {
+        "title": "FastAPI Template",
+        "description": "Description of this FastAPI server."
+    }
 
-    @app.on_event("startup")
-    async def startup():
-        await db.create_all()
+    app = FastAPI(**APP_CONFIG)
 
     @app.on_event("shutdown")
     async def shutdown():
         await db.close()
 
-    from src.views import api
 
     app.include_router(
         api,

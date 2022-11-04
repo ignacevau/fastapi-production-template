@@ -6,7 +6,7 @@ from sqlalchemy import delete as sqlalchemy_delete
 from sqlalchemy import update as sqlalchemy_update
 from sqlalchemy.future import select
 
-from src.database import Base, db
+from src.database import Base, db, metadata
 
 
 class User(Base):
