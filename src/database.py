@@ -1,10 +1,9 @@
-from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
-from sqlalchemy.orm import sessionmaker, as_declarative, declared_attr
-from sqlalchemy import MetaData
 from fastapi.encoders import jsonable_encoder
+from sqlalchemy import MetaData
+from sqlalchemy.ext.asyncio import AsyncSession, create_async_engine
+from sqlalchemy.orm import as_declarative, declared_attr, sessionmaker
 
 from src.config import settings
-
 
 POSTGRES_INDEXES_NAMING_CONVENTION = {
     "ix": "%(column_0_label)s_idx",
@@ -16,7 +15,7 @@ POSTGRES_INDEXES_NAMING_CONVENTION = {
 
 
 @as_declarative()
-class Base():
+class Base:
     __name__: str
 
     def serializable_dict(self, **kwargs):

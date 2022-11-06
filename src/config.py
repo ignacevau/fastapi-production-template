@@ -1,5 +1,6 @@
 from pydantic import AnyUrl, BaseSettings, PostgresDsn
 
+
 class AppSettings(BaseSettings):
     class Config:
         env_file = ".env"
@@ -8,5 +9,6 @@ class AppSettings(BaseSettings):
     DATABASE_URL: PostgresDsn
     ALLOWED_CORS_ORIGINS: set[AnyUrl]
     ENVIRONMENT: str = "development"
+
 
 settings = AppSettings()

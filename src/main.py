@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
-from src.database import db
-from src.views import api
 from src.config import settings
+from src.database import db
+from src.user.router import user
 
 
 def init_app():
@@ -10,7 +10,7 @@ def init_app():
 
     APP_CONFIG = {
         "title": "FastAPI Template",
-        "description": "Description of this FastAPI server."
+        "description": "Description of this FastAPI server.",
     }
 
     if settings.ENVIRONMENT == "production":
@@ -23,7 +23,7 @@ def init_app():
         await db.close()
 
     app.include_router(
-        api,
+        user,
         prefix="/api/v1",
     )
 

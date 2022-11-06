@@ -15,7 +15,7 @@ services:
       PG_DATA: /var/lib/postgresql/data
 
       # this ENV variable is only required for the healthcheck section
-      # if you don't specify it, the check command will fail stating the root user doesn't exist in posgres
+      # if you don't specify it, the check command will fail stating the root user doesn't exist in postgres
       PGUSER: "postgres" 
     healthcheck:
       # this command checks if the database is ready, right on the source db server
@@ -25,13 +25,13 @@ services:
       retries: 5
 
   web:
-    container_name: fastapi
+    container_name: fastapi_dev
     build:
       dockerfile: "docker/Dockerfile"
-      context: "."
+      context: "../"
       target: "development"
     volumes:
-      - .:/app
+      - ../:/app
     ports:
       - "8000:8000"
     depends_on:
