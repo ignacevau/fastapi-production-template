@@ -1,6 +1,6 @@
 from typing import List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, status
 from pydantic import BaseModel
 
 from src.models import User
@@ -23,7 +23,12 @@ api = APIRouter(
 )
 
 
-@api.post("/", response_model=UserSerializer)
+@api.post(
+    "/", 
+    response_model=UserSerializer,
+    status_code=status.HTTP_201_CREATED,
+    description="Create a user",
+)
 async def create_user(user: UserSchema):
     user = await User.create(**user.dict())
     return user

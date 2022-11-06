@@ -7,5 +7,6 @@ class AppSettings(BaseSettings):
 
     DATABASE_URL: PostgresDsn
     ALLOWED_CORS_ORIGINS: set[AnyUrl]
+    ENVIRONMENT: str = "development"
 
 settings = AppSettings()
