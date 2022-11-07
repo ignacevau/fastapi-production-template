@@ -9,6 +9,5 @@ set -e
 # run alembic migrations
 alembic upgrade head
 
-
 # Evaluating passed command:
 exec "$@"

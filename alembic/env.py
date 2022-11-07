@@ -1,3 +1,4 @@
+# isort: skip_file
 import asyncio
 from logging.config import fileConfig
 
@@ -6,6 +7,16 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from alembic import context
+
+# check if environment vars are loaded
+# only for development environment
+import os
+
+if "ENVIRONMENT" not in os.environ:
+    import dotenv
+
+    dotenv.load_dotenv("dev.host.env")
+
 from src.config import settings
 
 # this is the Alembic Config object, which provides
@@ -27,7 +38,7 @@ target_metadata = _Base.metadata
 # can be acquired:
 # my_important_option = config.get_main_option("my_important_option")
 # ... etc.
-config.set_main_option("sqlalchemy.url", settings.DATABASE_URL)
+config.set_main_option("sqlalchemy.url", settings.POSTGRES_DSN)
 
 
 def run_migrations_offline() -> None:

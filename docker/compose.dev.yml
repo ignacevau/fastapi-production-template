@@ -30,6 +30,8 @@ services:
       dockerfile: "docker/Dockerfile"
       context: "../"
       target: "development"
+    env_file:
+      - ../dev.env
     volumes:
       - ../:/app
     ports:

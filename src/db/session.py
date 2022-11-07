@@ -15,7 +15,7 @@ class AsyncDatabaseSession:
 
     def init(self):
         self._engine = create_async_engine(
-            settings.DATABASE_URL,
+            settings.POSTGRES_DSN,
             future=True,
             echo=True,
         )
