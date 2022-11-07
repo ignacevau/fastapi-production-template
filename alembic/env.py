@@ -6,7 +6,6 @@ from sqlalchemy.engine import Connection
 from sqlalchemy.ext.asyncio import AsyncEngine
 
 from alembic import context
-
 from src.config import settings
 
 # this is the Alembic Config object, which provides
@@ -20,9 +19,9 @@ if config.config_file_name is not None:
 
 # add your model's MetaData object here
 # for 'autogenerate' support
-from src.database import metadata
+from src.db import _Base
 
-target_metadata = metadata
+target_metadata = _Base.metadata
 
 # other values from the config, defined by the needs of env.py,
 # can be acquired:

@@ -1,8 +1,8 @@
 from fastapi import FastAPI
 
 from src.config import settings
-from src.database import db
-from src.user.router import user
+from src.db.session import db
+from src.modules.user.router import user
 
 
 def init_app():

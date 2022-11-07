@@ -4,7 +4,7 @@ version = "0.1.0"
 description = "Base setup for a docker cluster with asynchronous postgres database and FastAPI framework with Alembic."
 authors = ["ignacevau"]
 readme = "README.md"
-packages = [{include = "src"}]
+# packages = [{include = "src"}]
 
 
 [tool.poetry.dependencies]

@@ -6,11 +6,11 @@ from sqlalchemy import delete as sqlalchemy_delete
 from sqlalchemy import update as sqlalchemy_update
 from sqlalchemy.future import select
 
-from src.database import Base, db
+from src.db.base import Base
+from src.db.session import db
 
 
 class User(Base):
-    __tablename__ = "users"
     id = Column(String, primary_key=True)
     full_name = Column(String)
     created_at = Column(DateTime, index=True, default=datetime.utcnow)
